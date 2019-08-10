@@ -33,8 +33,10 @@ char NetworkClass(char ipv4_addr[])
     else if (ipv4_octet_1>= 224 && ipv4_octet_1<= 239) 
         return 'D'; 
   
-    else
+    else if(ipv4_octet_1>239)
         return 'E'; 
+
+    return 'R' ;
 } 
   
 void HostandNetwork_ID_A(char ipv4_addr[])
@@ -108,7 +110,7 @@ void HostandNetwork_ID_C(char ipv4_addr[])
 
 void HostandNetwork_ID_D_E(char ipv4_addr[])
 {
-    printf("In this Class, IP address is not divided into Network and Host ID\n");
+    printf("In this Class, No division into Network and Host ID\n");
 
 }
 
@@ -127,8 +129,11 @@ int main()
         HostandNetwork_ID_B(ipv4_addr);
     else if(network_class=='C')
         HostandNetwork_ID_C(ipv4_addr);
-    else
+    else if(network_class=='D'||network_class=='E')
         HostandNetwork_ID_D_E(ipv4_addr);
+    else
+        printf("Reserved IP Address\n");
+    
     
 
     return 0; 
