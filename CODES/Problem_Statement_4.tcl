@@ -78,20 +78,6 @@ for {set i 0} {$i < $k} {incr i} {
         $ns connect $tcp($i) $sink($i)
 }
 
-# #UDP_Config
-# set udp0 [new Agent/UDP]
-# $udp0 set class_ 2
-# $ns attach-agent $n(2) $udp0
-
-# set null0 [new Agent/Null]
-# $ns attach-agent $n(5) $null0
-
-# $ns connect $udp0 $null0
-
-# #CBR Config
-# set cbr0 [new Application/Traffic/CBR]
-# $cbr0 set rate_ 256Kb
-# $cbr0 attach-agent $udp0
 
 #FTP Config
 for {set i 0} {$i < $k} {incr i} {
@@ -100,14 +86,6 @@ for {set i 0} {$i < $k} {incr i} {
         $ftp($i) attach-agent $tcp($i)
 }
 
-
-
-#Scheduling Events
-# $ns rtmodel-at 0.5 down $n(0) $n(5)
-# $ns rtmodel-at 0.9 up $n(0) $n(5)
-
-# $ns rtmodel-at 0.7 down $n(0) $n(4)
-# $ns rtmodel-at 1.2 up $n(0) $n(4)
 
 for {set i 0} {$i < $k} {incr i} {
 
