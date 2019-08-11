@@ -14,7 +14,7 @@ $ns color 8 purple
 $ns rtproto DV
 
 # nam file for tracing the network
-set nf [open Problem_Statement_3.nam w]
+set nf [open Problem_Statement_4.nam w]
 $ns namtrace-all $nf
 
 #finish process to end the tcl program
@@ -22,7 +22,7 @@ proc finish {} {
         global ns nf
         $ns flush-trace
         close $nf
-        exec nam Problem_Statement_3.nam
+        exec nam Problem_Statement_4.nam
         exit 0
         }
 
@@ -36,8 +36,16 @@ set n($i) [$ns node]
 }
 
 #Creating Links: SFQ = Stochastic Fair Queuing if queue gets full
-for {set i 1} {$i<$N} {incr i} {
-$ns duplex-link $n(0) $n($i) 512Kb 10ms SFQ 
+for {set k -1; set i 0; set j 1} {$i<$N} {incr k; incr i; incr j} {
+    if {$j == $N} {
+        $ns duplex-link $n($i) $n(0) 512Kb 10ms SFQ
+    } elseif {$i == 0} {
+        $ns duplex-link $n(0) $n(1) 512Kb 10ms SFQ
+        
+    } else {
+        $ns duplex-link $n($i) $n($j) 512Kb 10ms SFQ
+    }
+ 
 }
 
 #input k(number of pairs to be connected) pairs
